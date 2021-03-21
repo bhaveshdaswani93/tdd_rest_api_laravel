@@ -15,6 +15,6 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
         $this->withoutExceptionHandling();
-        \Artisan::call('passport:instal');
+        $this->artisan('passport:install');
     }
 }

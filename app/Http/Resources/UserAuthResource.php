@@ -24,7 +24,7 @@ class UserAuthResource extends JsonResource
     {
         return [
             $this->merge(new UserResource($this)),
-            'access_token' => $this->accessToken
+            'auth_token' => $this->accessToken
         ];
     }
 }

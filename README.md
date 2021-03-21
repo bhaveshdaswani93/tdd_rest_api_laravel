@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
@@ -60,3 +61,10 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+=======
+# TDD Rest Api Laravel
+Test Driven Development For Rest Api using Laravel and Laravel Passport.
+- In this project we will create Registration,Login,Change password, Edit Profile and much more Using TDD approach
+- This project uses Laravel 8, Laravel Passport and later we will be using Repository Pattern
+- So This going to be an amazing project which guide you to implement TDD with Rest Api
+>>>>>>> c5c28c415dc7cb2956f8c87ee96021a72ae2b535
