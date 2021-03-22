@@ -63,6 +63,7 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable  $exception)
     {
+        // return parent::render($request, $exception);
         //        dd($exception);
         if (!request()->is('*api*') && !$request->ajax()) {
             return parent::render($request, $exception);
@@ -115,7 +116,10 @@ class Handler extends ExceptionHandler
                     ->withErrors($errors);
             }
         }
-        return $this->respondBadRequest($this->getValidationErrorMsg($errors));
+        // return $this->respondResourceConflictWithData(
+        //     $this->getValidationErrorMsg($errors)
+        // );
+        return $this->respondValidationError('Validation Error', $errors);
         //        return $this->respondValidationError("Validation Error", $errors);
     }
 

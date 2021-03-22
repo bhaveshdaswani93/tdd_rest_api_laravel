@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: SST5
@@ -101,13 +102,13 @@ trait ApiResponser
      *
      * @return object
      */
-    public function getResponseStructure($success = false, $payload = null, $message = '', $debug = null)
+    public function getResponseStructure($success = false, $payload = null, $message = '', $debug = null, $errors = null)
     {
         $requestId = Str::uuid()->toString();
         if (isset($debug)) {
-            $data = ['result' => $success, 'requestId' => $requestId, 'message' => $message, 'payload' => $payload, 'debug' => $debug];
+            $data = ['result' => $success, 'requestId' => $requestId, 'message' => $message, 'payload' => $payload, 'errors' => $errors, 'debug' => $debug];
         } else {
-            $data = ['result' => $success, 'requestId' => $requestId, 'message' => $message, 'payload' => $payload];
+            $data = ['result' => $success, 'requestId' => $requestId, 'message' => $message, 'payload' => $payload, 'errors' => $errors];
         }
         if (config('constants.app.api_log_enabled')) {
             $api_log = array();
@@ -134,9 +135,9 @@ trait ApiResponser
      */
     public function respondWithData($data)
     {
-//            return [$data];
+        //            return [$data];
         $responseData = $this->getResponseStructure(true, $data, '');
-//            return $responseData;
+        //            return $responseData;
         $response = new JsonResponse($responseData, $this->getStatusCode(), $this->getHeaders());
         return $response;
     }
@@ -162,9 +163,9 @@ trait ApiResponser
      *
      * @return JsonResponse
      */
-    public function respondWithMessageAndPayload($payload = null, $message = "Ok")
+    public function respondWithMessageAndPayload($payload = null, $message = "Ok", $errors = null)
     {
-        $data = $this->getResponseStructure(true, $payload, $message);
+        $data = $this->getResponseStructure(true, $payload, $message, null, $errors);
         $reponse = $this->respond($data);
         return $reponse;
     }
@@ -178,14 +179,14 @@ trait ApiResponser
      *
      * @return JsonResponse|null
      */
-    public function respondWithError($message = "Error", $e = null, $data = null)
+    public function respondWithError($message = "Error", $e = null, $data = null, $errors = null)
     {
         $response = null;
         if (\App::environment('local', 'staging') && isset($e)) {
             $debug_message = $e;
-            $data = $this->getResponseStructure(false, $data, $message, $debug_message);
+            $data = $this->getResponseStructure(false, $data, $message, $debug_message, $errors);
         } else {
-            $data = $this->getResponseStructure(false, $data, $message);
+            $data = $this->getResponseStructure(false, $data, $message, null, $errors);
         }
         $response = $this->respond($data);
         return $response;
@@ -343,7 +344,7 @@ trait ApiResponser
      */
     public function respondValidationError($message = "Validation Error", $data = null)
     {
-        return $this->setStatusCode(ResponseHTTP::HTTP_UNPROCESSABLE_ENTITY)->respondWithError($message, null, $data);
+        return $this->setStatusCode(ResponseHTTP::HTTP_UNPROCESSABLE_ENTITY)->respondWithError($message, null, null, $data);
     }
 
     /**
@@ -420,9 +421,9 @@ trait ApiResponser
      *
      * @return mixed
      */
-    public function respondResourceConflictWithData($payload = null, $message = "Resource Already Exists", $responseCode = ResponseHTTP::HTTP_CONFLICT)
+    public function respondResourceConflictWithData($errors = null, $message = "Resource Already Exists", $responseCode = ResponseHTTP::HTTP_CONFLICT)
     {
-        return $this->setStatusCode($responseCode)->respondWithMessageAndPayload($payload, $message);
+        return $this->setStatusCode($responseCode)->respondWithMessageAndPayload(null, $message, $errors);
     }
 
     /**
@@ -562,15 +563,15 @@ trait ApiResponser
 
                     //     in_array($key,['HTTP_ACCESSKEY','HTTP_ACCESSTOKEN','HTTP_KEY','HTTP_TOKEN'])
                     // )
-                    if(!is_array($key) && !is_array($value)) {
+                    if (!is_array($key) && !is_array($value)) {
                         $formated_request .= $key . ':' . $value . "\n";
                     }
 
-//                    {
-//
-//                    }
+                    //                    {
+                    //
+                    //                    }
                 } elseif ($type === 'request_body') {
-                    if(!is_array($key) && !is_array($value)) {
+                    if (!is_array($key) && !is_array($value)) {
                         $formated_request .= $key . ':' . $value . "\n";
                     }
                 } else {

@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\ChangePasswordController;
+use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +23,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/register', RegisterController::class);
+Route::post('/login', LoginController::class);
+
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::patch('users/change-password', ChangePasswordController::class);
+    Route::patch('users/profile', [UsersController::class, 'update']);
+});
