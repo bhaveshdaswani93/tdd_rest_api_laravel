@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\ChangePasswordController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Http\Request;
@@ -30,4 +31,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::patch('users/change-password', ChangePasswordController::class);
     Route::patch('users/profile', [UsersController::class, 'update']);
     Route::post('logout', LogoutController::class);
+
+    Route::post('posts', [PostController::class, 'store']);
 });
