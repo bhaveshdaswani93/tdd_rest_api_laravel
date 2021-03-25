@@ -33,4 +33,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('logout', LogoutController::class);
 
     Route::post('posts', [PostController::class, 'store']);
+
+    Route::patch('posts/{post}', [PostController::class, 'update']);
 });

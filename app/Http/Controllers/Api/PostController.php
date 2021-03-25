@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -56,9 +58,26 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePostRequest $request, $id)
     {
-        //
+
+        $post = Post::find($id);
+
+        // if (!Gate::allows('update', $post)) {
+        // if (auth()->user()->cannot('update', $post)) {
+        // if (auth()->user()->cannot('update', $post)) {
+        //     return $this->respondForbidden("You are not authorized to perform this action");
+        // }
+
+        // $this->authorize('update', $post);
+
+        $post->update(
+            [
+                'title' => $request->title,
+                'description' => $request->description
+            ]
+        );
+        return $this->respondWithMessage('Post updated successfully.');
     }
 
     /**

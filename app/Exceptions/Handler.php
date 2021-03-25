@@ -77,6 +77,7 @@ class Handler extends ExceptionHandler
         } elseif ($exception instanceof AuthenticationException) {
             return $this->unauthenticated($request, $exception);
         } elseif ($exception instanceof AuthorizationException) {
+            // dump($exception);
             return $this->respondForbidden($exception->getMessage());
         } elseif ($exception instanceof NotFoundHttpException) {
             return $this->respondNotFound("The requested resource could not be found.");
