@@ -48,7 +48,11 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::find($id);
+
+        $this->authorize('view', $post);
+
+        return $this->respondWithData(new PostResource($post));
     }
 
     /**
@@ -60,6 +64,8 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, $id)
     {
+
+
 
         $post = Post::find($id);
 
@@ -88,6 +94,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+
+        return $this->respondNoContent("Post Deleted Successfully.");
     }
 }

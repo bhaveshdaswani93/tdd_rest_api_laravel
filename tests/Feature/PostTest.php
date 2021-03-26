@@ -132,4 +132,86 @@ class PostTest extends TestCase
         // dump($response->json());
         $response->assertStatus(403);
     }
+
+    /** @test */
+    public function a_user_can_view_their_post()
+    {
+        $user = $this->signIn();
+
+        $post = Post::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->json('get', 'api/posts/' . $post->id);
+
+        $response->assertOk();
+
+        $response->assertJson(
+            function (AssertableJson $json) use ($post) {
+                $json->where('payload.title', $post->title)
+                    ->where('payload.description', $post->description)
+                    ->where('payload.post_id', $post->id)
+                    // ->missing('payload.password')
+                    ->has('payload.user_id')
+                    ->etc();
+            }
+        );
+    }
+
+    /** @test */
+    public function guests_cannot_view_project()
+    {
+        $this->handleExceptions([AuthenticationException::class]);
+
+        $post = Post::factory()->create();
+
+        $response = $this->json('get', 'api/posts/' . $post->id);
+
+        $response->assertUnauthorized();
+    }
+
+    /** @test */
+    public function an_authenticated_user_cannot_view_others_post()
+    {
+        // Test
+        $this->handleExceptions([AuthorizationException::class]);
+
+        $user = $this->signIn();
+
+        $post = Post::factory()->create();
+
+        $response = $this->json('get', 'api/posts/' . $post->id);
+
+        $response->assertForbidden();
+    }
+
+    /** @test */
+    public function a_user_can_delete_its_post()
+    {
+        // Test
+
+        $user = $this->signIn();
+
+        $post = Post::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->json('delete', 'api/posts/' . $post->id);
+
+        $response->assertNoContent();
+
+        // dd($post->id);
+
+        $this->assertDatabaseMissing(
+            'posts',
+            [
+                'id' => $post->id,
+                'title' => $post->title,
+                'description' => $post->description
+            ]
+        );
+
+        //         // Check that the user has been soft deleted
+        // $this->assertSoftDeleted('users', [
+        //     'id' => $deletedUser->id,
+        //     'name' => $deletedUser->name,
+        //     'email' => $deletedUser->email,
+        // ]);
+    }
 }
