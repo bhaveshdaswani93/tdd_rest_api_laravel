@@ -20,7 +20,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::whereUserId(auth()->id())->get();
 
         return $this->respondWithData(new PostCollection($posts));
     }

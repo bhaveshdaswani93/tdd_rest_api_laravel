@@ -258,6 +258,8 @@ class PostTest extends TestCase
 
         $posts = Post::factory()->count(3)->create(['user_id' => $user->id]);
 
+        $otherPosts = Post::factory()->count(3)->create();
+
         // dd($posts->count());
 
         $response = $this->json('get', 'api/posts');
@@ -273,6 +275,8 @@ class PostTest extends TestCase
                 $this->assertContains($post->id, array_column($response['payload'], 'post_id'));
             }
         );
+
+        // $this->assertNotContains()
 
         $response->assertJsonStructure(
             [
@@ -302,5 +306,37 @@ class PostTest extends TestCase
         //                 );
         //         }
         //     );
+    }
+
+    /** @test  */
+    public function guests_cannot_view_all_projects()
+    {
+
+        $this->withExceptionHandling();
+
+        $response = $this->json('get', 'api/posts');
+
+        $response->assertUnauthorized();
+    }
+
+    /** @test */
+    public function an_authenticated_user_cannot_view_others_all_posts()
+    {
+        // Test
+        $user = $this->signIn();
+
+        Post::factory()->count(3)->create(['user_id' => $user->id]);
+
+        $otherPosts = Post::factory()->count(3)->create();
+
+        // dd($posts->count());
+
+        $response = $this->json('get', 'api/posts');
+
+        $otherPosts->map(
+            function ($otherPost) use ($response) {
+                $this->assertNotContains($otherPost->id, array_column($response['payload'], 'post_id'));
+            }
+        );
     }
 }
