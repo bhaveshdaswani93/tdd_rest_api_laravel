@@ -37,4 +37,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::patch('posts/{post}', [PostController::class, 'update']);
     Route::get('posts/{post}', [PostController::class, 'show']);
     Route::delete('posts/{post}', [PostController::class, 'destroy']);
+    Route::get('posts', [PostController::class, 'index']);
 });

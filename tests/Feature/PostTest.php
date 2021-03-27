@@ -198,7 +198,16 @@ class PostTest extends TestCase
 
         // dd($post->id);
 
-        $this->assertDatabaseMissing(
+        // $this->assertDatabaseMissing(
+        //     'posts',
+        //     [
+        //         'id' => $post->id,
+        //         'title' => $post->title,
+        //         'description' => $post->description
+        //     ]
+        // );
+
+        $this->assertSoftDeleted(
             'posts',
             [
                 'id' => $post->id,
@@ -213,5 +222,85 @@ class PostTest extends TestCase
         //     'name' => $deletedUser->name,
         //     'email' => $deletedUser->email,
         // ]);
+    }
+
+    /** @test */
+    public function guests_cannot_delete_a_post()
+    {
+        $this->handleExceptions([AuthenticationException::class]);
+
+        $post = Post::factory()->create();
+
+        $response = $this->json('delete', 'api/posts/' . $post->id);
+
+        $response->assertUnauthorized();
+    }
+
+    /** @test */
+    public function an_authenticated_user_cannot_delete_others_post()
+    {
+        $this->handleExceptions([AuthorizationException::class]);
+
+        $this->signIn();
+
+        $post = Post::factory()->create();
+
+        $response = $this->json('delete', 'api/posts/' . $post->id);
+
+        $response->assertForbidden();
+    }
+
+    /** @test */
+    public function a_user_can_view_their_all_projects()
+    {
+        // Test
+        $user = $this->signIn();
+
+        $posts = Post::factory()->count(3)->create(['user_id' => $user->id]);
+
+        // dd($posts->count());
+
+        $response = $this->json('get', 'api/posts');
+
+        // dd($response['payload']);
+
+        $this->assertCount($posts->count(), $response['payload']);
+
+        // dd(array_column($response['payload'], 'post_id'));
+
+        $posts->map(
+            function ($post) use ($response) {
+                $this->assertContains($post->id, array_column($response['payload'], 'post_id'));
+            }
+        );
+
+        $response->assertJsonStructure(
+            [
+                'payload' => [
+                    '*' => [
+                        'post_id',
+                        'user_id',
+                        'title',
+                        'description'
+                    ]
+                ]
+            ]
+        );
+
+        /** Check for pagination */
+
+        // $response
+        //     ->assertJson(
+        //         function (AssertableJson $json) use ($posts) {
+        //             // $json->has('meta')
+        //             dd($posts->pluck('title', 'id')->all());
+        //             dump($json->toArray()['payload']);
+        //             $json
+        //                 ->has(
+        //                     'payload',
+        //                     $posts->count()
+        //                 );
+        //         }
+        //     );
     }
 }
