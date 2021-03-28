@@ -20,7 +20,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::whereUserId(auth()->id())->get();
+        $posts = Post::whereUserId(auth()->id())
+            ->paginate(config('constants.app.pagination_size'));
 
         return $this->respondWithData(new PostCollection($posts));
     }

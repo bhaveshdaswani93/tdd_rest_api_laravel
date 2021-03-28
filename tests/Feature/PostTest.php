@@ -251,12 +251,81 @@ class PostTest extends TestCase
     }
 
     /** @test */
+    // public function a_user_can_view_their_all_projects()
+    // {
+    //     // Test
+    //     $user = $this->signIn();
+
+    //     $posts = Post::factory()->count(3)->create(['user_id' => $user->id]);
+
+    //     $otherPosts = Post::factory()->count(3)->create();
+
+    //     // dd($posts->count());
+
+    //     $response = $this->json('get', 'api/posts');
+
+    //     // dd($response['payload']);
+
+    //     $this->assertCount($posts->count(), $response['payload']);
+
+    //     // dd(array_column($response['payload'], 'post_id'));
+
+    //     $posts->map(
+    //         function ($post) use ($response) {
+    //             $this->assertContains($post->id, array_column($response['payload'], 'post_id'));
+    //         }
+    //     );
+
+    //     // $this->assertNotContains()
+
+    //     $response->assertJsonStructure(
+    //         [
+    //             'payload' => [
+    //                 '*' => [
+    //                     'post_id',
+    //                     'user_id',
+    //                     'title',
+    //                     'description'
+    //                 ]
+    //             ]
+    //         ]
+    //     );
+
+    //     /** Check for pagination */
+
+    //     // $response
+    //     //     ->assertJson(
+    //     //         function (AssertableJson $json) use ($posts) {
+    //     //             // $json->has('meta')
+    //     //             dd($posts->pluck('title', 'id')->all());
+    //     //             dump($json->toArray()['payload']);
+    //     //             $json
+    //     //                 ->has(
+    //     //                     'payload',
+    //     //                     $posts->count()
+    //     //                 );
+    //     //         }
+    //     //     );
+    // }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
     public function a_user_can_view_their_all_projects()
     {
-        // Test
         $user = $this->signIn();
 
-        $posts = Post::factory()->count(3)->create(['user_id' => $user->id]);
+        $paginationSize = config('constants.app.pagination_size');
+        // dd($paginationSize);
+
+        $additionalCount = 1;
+
+        $totalPostToCreate = $paginationSize + $additionalCount;
+
+        $posts = Post::factory()->count($totalPostToCreate)
+            ->create(['user_id' => $user->id]);
 
         $otherPosts = Post::factory()->count(3)->create();
 
@@ -264,48 +333,97 @@ class PostTest extends TestCase
 
         $response = $this->json('get', 'api/posts');
 
-        // dd($response['payload']);
+        $response->assertOk();
 
-        $this->assertCount($posts->count(), $response['payload']);
+
+
+        // dd($response->json());
+
+        $this->assertCount($paginationSize, $response['payload']['data']);
+
+        $this->assertEquals($totalPostToCreate, $response['payload']['meta']['total']);
+
+        // $this->assertEquals($totalPostToCreate, $response['payload']['meta']['total']);
+
+        // $this->assertEquals($paginationSize, $response['payload']['meta']['per_page']);
+
+        // $this->assertEquals(ceil($totalPostToCreate / $paginationSize), $response['payload']['meta']['last_page']);
 
         // dd(array_column($response['payload'], 'post_id'));
 
-        $posts->map(
-            function ($post) use ($response) {
-                $this->assertContains($post->id, array_column($response['payload'], 'post_id'));
-            }
-        );
+        // $posts->map(
+        //     function ($post) use ($response) {
+        //         $this->assertContains($post->id, array_column($response['payload'], 'post_id'));
+        //     }
+        // );
 
         // $this->assertNotContains()
 
         $response->assertJsonStructure(
             [
                 'payload' => [
-                    '*' => [
-                        'post_id',
-                        'user_id',
-                        'title',
-                        'description'
+                    'data' => [
+                        '*' => [
+                            'post_id',
+                            'user_id',
+                            'title',
+                            'description'
+                        ]
+                    ],
+
+                ]
+            ]
+        );
+    }
+
+    /** @test */
+    public function a_user_can_paginate_their_all_projects()
+    {
+        $user = $this->signIn();
+
+        $paginationSize = config('constants.app.pagination_size');
+        // dd($paginationSize);
+
+        $additionalCount = 1;
+
+        $totalPostToCreate = $paginationSize + $additionalCount;
+
+        $posts = Post::factory()->count($totalPostToCreate)
+            ->create(['user_id' => $user->id]);
+
+        $otherPosts = Post::factory()->count(3)->create();
+
+        // dd($posts->count());
+
+        $response = $this->json('get', 'api/posts?page=2');
+
+        $response->assertOk();
+
+
+
+        // dd($response->json());
+
+        $this->assertCount($additionalCount, $response['payload']['data']);
+
+        $this->assertEquals($totalPostToCreate, $response['payload']['meta']['total']);
+
+        $this->assertEquals($paginationSize, $response['payload']['meta']['per_page']);
+
+        $this->assertEquals(ceil($totalPostToCreate / $paginationSize), $response['payload']['meta']['last_page']);
+
+        $response->assertJsonStructure(
+            [
+                'payload' => [
+
+                    'meta' => [
+                        'current_page',
+                        'last_page',
+                        'per_page',
+                        'total'
                     ]
                 ]
             ]
         );
-
-        /** Check for pagination */
-
-        // $response
-        //     ->assertJson(
-        //         function (AssertableJson $json) use ($posts) {
-        //             // $json->has('meta')
-        //             dd($posts->pluck('title', 'id')->all());
-        //             dump($json->toArray()['payload']);
-        //             $json
-        //                 ->has(
-        //                     'payload',
-        //                     $posts->count()
-        //                 );
-        //         }
-        //     );
     }
 
     /** @test  */
