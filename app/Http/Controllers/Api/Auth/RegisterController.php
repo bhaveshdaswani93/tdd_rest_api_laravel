@@ -7,11 +7,20 @@ use App\Http\Requests\RegisterUserRequest;
 use App\Http\Resources\UserAuthResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Services\Contracts\AuthServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+
+    private $authService;
+
+    public function __construct(AuthServiceInterface $authService)
+    {
+        $this->authService = $authService;
+    }
+
     /**
      * Handle the incoming request.
      *
@@ -20,11 +29,13 @@ class RegisterController extends Controller
      */
     public function __invoke(RegisterUserRequest $request)
     {
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
+        // $user = User::create([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password)
+        // ]);
+
+        $user = $this->authService->register($request->validated());
 
         $accessToken = $user->createToken('Auth Token')->accessToken;
 

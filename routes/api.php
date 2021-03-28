@@ -5,7 +5,8 @@ use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UsersController;
-use App\Http\Controllers\Auth\LogoutController;
+// use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Api\Auth\LogoutController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

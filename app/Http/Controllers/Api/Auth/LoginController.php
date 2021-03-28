@@ -6,11 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Resources\UserAuthResource;
 use App\Models\User;
+use App\Services\Contracts\AuthServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
+    private $authService;
+
+    public function __construct(AuthServiceInterface $authService)
+    {
+        $this->authService = $authService;
+    }
+
+
     /**
      * Handle the incoming request.
      *
@@ -19,14 +28,14 @@ class LoginController extends Controller
      */
     public function __invoke(LoginUserRequest $request)
     {
-        $user = User::where('email', $request->email)->first();
-        if (!$user) {
-            return $this->respondBadRequest('User not registered.');
+
+        $result = $this->authService->login($request->validated());
+
+        if ($result['result'] === false) {
+            return $this->respondBadRequest($result['message']);
         }
 
-        if (!Hash::check('password', $user->password)) {
-            return $this->respondBadRequest('Wrong password provided.');
-        }
+        $user = $result['user'];
 
         $accessToken = $user->createToken('Auth Token')->accessToken;
 
