@@ -42,14 +42,20 @@ class UserServiceTest extends TestCase
         $this->assertTrue(Hash::check($newPassword, $user->password));
     }
 
+    /** @test */
     public function it_can_update_user_details()
     {
         $user = User::factory()->create();
 
         $attributes = [
-            'name' => $this->faker->name
-        ]
+            'name' => $this->faker->name,
+            'email' => $this->faker->unique()->safeEmail
+        ];
 
-        $this->service->update()
+        $this->service->update($user, $attributes);
+
+        $attributes['id'] = $user->id;
+
+        $this->assertDatabaseHas('users', $attributes);
     }
 }

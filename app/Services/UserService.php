@@ -16,4 +16,9 @@ class UserService implements UserServiceInterface
             ]
         );
     }
+
+    public function update(User $user, array $attributes): void
+    {
+        $user->update($attributes);
+    }
 }

@@ -8,11 +8,25 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\Services\Contracts\PostServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
+
+    /**
+     * Undocumented variable
+     *
+     * @var PostServiceInterface
+     */
+    protected $postService;
+
+    public function __construct(PostServiceInterface $postService)
+    {
+        $this->postService = $postService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +34,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::whereUserId(auth()->id())
-            ->paginate(config('constants.app.pagination_size'));
+        $posts = $this->postService->list(auth()->user());
 
         return $this->respondWithData(new PostCollection($posts));
     }
@@ -34,9 +47,7 @@ class PostController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-        $post = auth()->user()->posts()->create(
-            $request->validated()
-        );
+        $post = $this->postService->store(auth()->user(), $request->validated());
 
         return $this->respondCreatedWithPayload(
             new PostResource($post),
@@ -52,7 +63,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id);
+        // $post = Post::find($id);
+
+        $post = $this->postService->find($id);
 
         $this->authorize('view', $post);
 
@@ -71,7 +84,7 @@ class PostController extends Controller
 
 
 
-        $post = Post::find($id);
+        // $post = Post::find($id);
 
         // if (!Gate::allows('update', $post)) {
         // if (auth()->user()->cannot('update', $post)) {
@@ -81,12 +94,15 @@ class PostController extends Controller
 
         // $this->authorize('update', $post);
 
-        $post->update(
-            [
-                'title' => $request->title,
-                'description' => $request->description
-            ]
-        );
+        // $post->update(
+        //     [
+        //         'title' => $request->title,
+        //         'description' => $request->description
+        //     ]
+        // );
+
+        $this->postService->update($id, $request->validated());
+
         return $this->respondWithMessage('Post updated successfully.');
     }
 
@@ -98,11 +114,11 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::find($id);
+        $post = $this->postService->find($id);
 
         $this->authorize('delete', $post);
 
-        $post->delete();
+        $this->postService->delete($id);
 
         return $this->respondNoContent("Post Deleted Successfully.");
     }
