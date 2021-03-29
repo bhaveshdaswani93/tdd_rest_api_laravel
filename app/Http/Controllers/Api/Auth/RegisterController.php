@@ -13,19 +13,23 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-
+    /**
+     * @var AuthServiceInterface
+     */
     private $authService;
 
+    /**
+     * RegisterController constructor.
+     * @param AuthServiceInterface $authService
+     */
     public function __construct(AuthServiceInterface $authService)
     {
         $this->authService = $authService;
     }
 
     /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param RegisterUserRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke(RegisterUserRequest $request)
     {

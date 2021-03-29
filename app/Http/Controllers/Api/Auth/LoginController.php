@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
+    /**
+     * @var AuthServiceInterface
+     */
     private $authService;
 
     public function __construct(AuthServiceInterface $authService)
@@ -21,14 +24,11 @@ class LoginController extends Controller
 
 
     /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param LoginUserRequest $request
+     * @return \Illuminate\Http\JsonResponse|mixed
      */
     public function __invoke(LoginUserRequest $request)
     {
-
         $result = $this->authService->login($request->validated());
 
         if ($result['result'] === false) {

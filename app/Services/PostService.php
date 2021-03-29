@@ -3,33 +3,41 @@
 namespace App\Services;
 
 use App\Models\Post;
+
 use App\Models\User;
 use App\Services\Contracts\PostServiceInterface;
-use Illuminate\Pagination\LengthAwarePaginator;
+//use Illuminate\Pagination\LengthAwarePaginator;
+//use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Hash;
 
 class PostService implements PostServiceInterface
 {
+    /**
+     * @param User $user
+     * @return LengthAwarePaginator
+     */
     public function list(User $user): LengthAwarePaginator
     {
-        return Post::whereUserId($user->id)
+        return Post::where('user_id', $user->id)
             ->paginate(config('constants.app.pagination_size'));
     }
 
+    /**
+     * @param User $user
+     * @param array $attributes
+     * @return Post
+     */
     public function store(User $user, array $attributes): Post
     {
         return $user->posts()->create(
             $attributes
         );
     }
+
     /**
-     * This will return Post Model
-     *
-     * @param integer $id This is the Id for which database has to be queried
-     * 
+     * @param int $id
      * @return Post
-     *
-     * @throws Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function find(int $id): Post
     {
@@ -37,9 +45,7 @@ class PostService implements PostServiceInterface
     }
 
     /**
-     * Undocumented function
-     *
-     * @param integer $id
+     * @param int $id
      * @param array $attributes
      * @return Post
      */
@@ -53,10 +59,8 @@ class PostService implements PostServiceInterface
     }
 
     /**
-     * Undocumented function
-     *
-     * @param integer $id
-     * @return void
+     * @param int $id
+     * @throws \Exception
      */
     public function delete(int $id): void
     {

@@ -11,17 +11,23 @@ class UsersController extends Controller
 {
 
     /**
-     * Undocumented variable
-     *
      * @var UserServiceInterface
      */
     private $userService;
 
+    /**
+     * UsersController constructor.
+     * @param UserServiceInterface $userService
+     */
     public function __construct(UserServiceInterface $userService)
     {
         $this->userService = $userService;
     }
 
+    /**
+     * @param UpdateProfileRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(UpdateProfileRequest $request)
     {
         // $request->validate([]);

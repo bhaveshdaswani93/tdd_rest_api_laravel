@@ -11,22 +11,23 @@ use Illuminate\Support\Facades\Hash;
 class ChangePasswordController extends Controller
 {
     /**
-     * Undocumented variable
-     *
      * @var UserServiceInterface
      */
     private $userService;
 
+    /**
+     * ChangePasswordController constructor.
+     * @param UserServiceInterface $userService
+     */
     public function __construct(UserServiceInterface $userService)
     {
         $this->userService = $userService;
     }
 
+
     /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param ChangePasswordRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke(ChangePasswordRequest $request)
     {

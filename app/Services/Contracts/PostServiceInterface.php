@@ -4,38 +4,40 @@ namespace App\Services\Contracts;
 
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+
+//use Illuminate\Pagination\LengthAwarePaginator;
 
 interface PostServiceInterface
 {
+    /**
+     * @param User $user
+     * @return LengthAwarePaginator
+     */
     public function list(User $user): LengthAwarePaginator;
+
+    /**
+     * @param User $user
+     * @param array $attributes
+     * @return Post
+     */
     public function store(User $user, array $attributes): Post;
 
     /**
-     * This will return Post Model
-     *
-     * @param integer $id This is the Id for which database has to be queried
-     * 
+     * @param int $id
      * @return Post
-     *
-     * @throws Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function find(int $id): Post;
 
     /**
-     * Undocumented function
-     *
-     * @param integer $id
+     * @param int $id
      * @param array $attributes
      * @return Post
      */
     public function update(int $id, array $attributes): Post;
 
     /**
-     * Undocumented function
-     *
-     * @param integer $id
-     * @return void
+     * @param int $id
      */
     public function delete(int $id): void;
 }

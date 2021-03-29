@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Hash;
 
 class UserService implements UserServiceInterface
 {
+    /**
+     * @param User $user
+     * @param string $newPassword
+     */
     public function changePassword(User $user, string $newPassword): void
     {
         $user->update(
@@ -17,6 +21,10 @@ class UserService implements UserServiceInterface
         );
     }
 
+    /**
+     * @param User $user
+     * @param array $attributes
+     */
     public function update(User $user, array $attributes): void
     {
         $user->update($attributes);

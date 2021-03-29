@@ -16,8 +16,6 @@ class PostController extends Controller
 {
 
     /**
-     * Undocumented variable
-     *
      * @var PostServiceInterface
      */
     protected $postService;
@@ -28,9 +26,9 @@ class PostController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display List of users posts
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -40,10 +38,8 @@ class PostController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreatePostRequest $request
+     * @return mixed
      */
     public function store(CreatePostRequest $request)
     {
@@ -56,10 +52,9 @@ class PostController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show($id)
     {
@@ -73,11 +68,9 @@ class PostController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdatePostRequest $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdatePostRequest $request, $id)
     {
@@ -107,10 +100,9 @@ class PostController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return mixed
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($id)
     {
