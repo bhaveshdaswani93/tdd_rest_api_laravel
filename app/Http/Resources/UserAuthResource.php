@@ -4,7 +4,6 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-
 class UserAuthResource extends JsonResource
 {
     public $accessToken;

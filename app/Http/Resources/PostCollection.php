@@ -6,7 +6,6 @@ use App\Traits\ApiResourceTrait;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Pagination\AbstractPaginator;
 
-
 class PostCollection extends ResourceCollection
 {
     use ApiResourceTrait;

@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
-
     /**
      * @var PostServiceInterface
      */

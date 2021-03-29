@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Request;
 use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 use Illuminate\Support\Str;
 
-
 trait ApiResponser
 {
     /**

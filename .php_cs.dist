@@ -1,0 +1,17 @@
+<?php
+
+$finder = PhpCsFixer\Finder::create()
+    ->exclude('tests')
+    ->exclude('storage')
+    ->exclude('bootstrap')
+    ->notPath('_ide_helper.php')
+    ->notPath('_ide_helper_models.php')
+;
+
+$config = new PhpCsFixer\Config();
+return $config->setRules([
+        '@PSR12' => true,
+
+    ])
+    ->setFinder($finder)
+;

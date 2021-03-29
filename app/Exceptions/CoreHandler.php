@@ -82,7 +82,7 @@ class Handler extends ExceptionHandler
             return $this->respondMethodNotAllowed("The resource does not support the current http method.");
         } elseif ($exception instanceof HttpException) {
             return $this->respondCustomError($exception->getMessage(), $exception->getStatusCode(), $exception);
-            //                return $this->errorResponse($exception->getMessage(),$exception->getStatusCode());
+        //                return $this->errorResponse($exception->getMessage(),$exception->getStatusCode());
         } elseif ($exception instanceof QueryException) {
             $sqlErrorCode = $exception->errorInfo[1];
             if ($sqlErrorCode == 1451) {
