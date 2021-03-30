@@ -1,0 +1,424 @@
+openapi: 3.0.3
+info:
+    title: 'Blog Api'
+    description: 'This is blog api documentation'
+    version: 1.0.0
+servers:
+    -
+        url: 'http://localhost:8000'
+paths:
+    /api/register:
+        post:
+            summary: 'Register Api'
+            description: 'This endpoint allow you to register user.'
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: '200'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    result: true
+                                    message: ''
+                                    payload: { user_id: 2, name: Lorem, email: ipsum+1@gmail.com, auth_token: '<auth token>' }
+                                    errors: null
+                                properties:
+                                    result: { type: boolean, example: true }
+                                    message: { type: string, example: '' }
+                                    payload: { type: object, example: { user_id: 2, name: Lorem, email: ipsum+1@gmail.com, auth_token: '<auth token>' } }
+                                    errors: { type: string, example: null }
+                422:
+                    description: '422, Email already registered'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    result: false
+                                    message: 'Validation Error'
+                                    payload: null
+                                    errors: { email: ['The email has already been taken.'] }
+                                properties:
+                                    result: { type: boolean, example: false }
+                                    message: { type: string, example: 'Validation Error' }
+                                    payload: { type: string, example: null }
+                                    errors: { type: object, example: { email: ['The email has already been taken.'] } }
+            tags:
+                - 'Authentication Endpoints'
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                name:
+                                    type: string
+                                    description: 'The Name of the post.'
+                                    example: quia
+                                email:
+                                    type: string
+                                    description: 'The unique email of the user.'
+                                    example: houston.powlowski@example.net
+                                password:
+                                    type: string
+                                    description: 'The password which will be used for login'
+                                    example: repellat
+                            required:
+                                - name
+                                - email
+                                - password
+            security: []
+    /api/user:
+        get:
+            summary: ''
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                401:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    result: false
+                                    message: 'Given authorization token is invalid, please login again'
+                                    payload: null
+                                    errors: null
+                                properties:
+                                    result: { type: boolean, example: false }
+                                    message: { type: string, example: 'Given authorization token is invalid, please login again' }
+                                    payload: { type: string, example: null }
+                                    errors: { type: string, example: null }
+            tags:
+                - Endpoints
+            security: []
+    /api/login:
+        post:
+            summary: ''
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                password:
+                                    type: string
+                                    description: ''
+                                    example: eum
+                                email:
+                                    type: string
+                                    description: ''
+                                    example: qui
+                            required:
+                                - password
+                                - email
+            security: []
+    /api/users/change-password:
+        patch:
+            summary: ''
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                password:
+                                    type: string
+                                    description: ''
+                                    example: tenetur
+                            required:
+                                - password
+            security: []
+    /api/logout:
+        post:
+            summary: 'Logout the user'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+    /api/posts:
+        post:
+            summary: ''
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                title:
+                                    type: string
+                                    description: ''
+                                    example: modi
+                                description:
+                                    type: string
+                                    description: ''
+                                    example: qui
+                            required:
+                                - title
+                                - description
+            security: []
+        get:
+            summary: 'Display List of users posts'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                401:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    result: false
+                                    message: 'Given authorization token is invalid, please login again'
+                                    payload: null
+                                    errors: null
+                                properties:
+                                    result: { type: boolean, example: false }
+                                    message: { type: string, example: 'Given authorization token is invalid, please login again' }
+                                    payload: { type: string, example: null }
+                                    errors: { type: string, example: null }
+            tags:
+                - Endpoints
+            security: []
+    '/api/posts/{post}':
+        patch:
+            summary: ''
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                title:
+                                    type: string
+                                    description: ''
+                                    example: qui
+                                description:
+                                    type: string
+                                    description: ''
+                                    example: quas
+                            required:
+                                - title
+                                - description
+            security: []
+        get:
+            summary: ''
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                401:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    result: false
+                                    message: 'Given authorization token is invalid, please login again'
+                                    payload: null
+                                    errors: null
+                                properties:
+                                    result: { type: boolean, example: false }
+                                    message: { type: string, example: 'Given authorization token is invalid, please login again' }
+                                    payload: { type: string, example: null }
+                                    errors: { type: string, example: null }
+            tags:
+                - Endpoints
+            security: []
+        delete:
+            summary: ''
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+        parameters:
+            -
+                in: path
+                name: post
+                description: ''
+                example: harum
+                required: true
+                schema:
+                    type: string
+components:
+    securitySchemes:
+        default:
+            type: http
+            scheme: bearer
+            description: ''
+security:
+    -
+        default: []

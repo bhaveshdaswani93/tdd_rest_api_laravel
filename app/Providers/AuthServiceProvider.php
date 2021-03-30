@@ -30,9 +30,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        if (!$this->app->routesAreCached()) {
-            Passport::routes();
-        }
+//        if (!$this->app->routesAreCached()) {
+////            Passport::routes();
+//        }
 
         // Gate::define('update-post', function (User $user, Post $post) {
         //     // dump($post->user_id);

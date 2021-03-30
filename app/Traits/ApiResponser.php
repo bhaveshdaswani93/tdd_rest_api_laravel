@@ -105,9 +105,11 @@ trait ApiResponser
     {
         $requestId = Str::uuid()->toString();
         if (isset($debug)) {
-            $data = ['result' => $success, 'requestId' => $requestId, 'message' => $message, 'payload' => $payload, 'errors' => $errors, 'debug' => $debug];
+//            $data = ['result' => $success, 'requestId' => $requestId, 'message' => $message, 'payload' => $payload, 'errors' => $errors, 'debug' => $debug];
+            $data = ['result' => $success, 'message' => $message, 'payload' => $payload, 'errors' => $errors, 'debug' => $debug];
         } else {
-            $data = ['result' => $success, 'requestId' => $requestId, 'message' => $message, 'payload' => $payload, 'errors' => $errors];
+//            $data = ['result' => $success, 'requestId' => $requestId, 'message' => $message, 'payload' => $payload, 'errors' => $errors];
+            $data = ['result' => $success, 'message' => $message, 'payload' => $payload, 'errors' => $errors];
         }
         if (config('constants.app.api_log_enabled')) {
             $api_log = array();

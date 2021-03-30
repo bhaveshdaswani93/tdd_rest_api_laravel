@@ -10,6 +10,11 @@ use App\Services\Contracts\AuthServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * Class LoginController
+ * @group Authentication Endpoints
+ * @package App\Http\Controllers\Api\Auth
+ */
 class LoginController extends Controller
 {
     /**
@@ -24,6 +29,11 @@ class LoginController extends Controller
 
 
     /**
+     * Login Api
+     *
+     * This endpoint allow you to login user.
+     *
+     * @unauthenticated
      * @param LoginUserRequest $request
      * @return \Illuminate\Http\JsonResponse|mixed
      */
