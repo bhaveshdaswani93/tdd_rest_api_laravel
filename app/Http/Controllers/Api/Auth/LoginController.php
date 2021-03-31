@@ -34,6 +34,31 @@ class LoginController extends Controller
      * This endpoint allow you to login user.
      *
      * @unauthenticated
+     *
+     * @responseField auth_token The Bearer token which should be included in header for auth required endpoint
+     *
+     * @response
+     * {
+     * "result": true,
+     * "message": "",
+     * "payload": {
+     * "user_id": 6,
+     * "name": "Lorem",
+     * "email": "ipsum+3@gmail.com",
+     * "auth_token": "<auth token>"
+     * },
+     * "errors": null
+     * }
+     * @response status=400 scenario="Wrong password"
+     * {
+     * "result": false,
+     * "message": "Wrong password provided.",
+     * "payload": null,
+     * "errors": null
+     * }
+     *
+     *
+     *
      * @param LoginUserRequest $request
      * @return \Illuminate\Http\JsonResponse|mixed
      */

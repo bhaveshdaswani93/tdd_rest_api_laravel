@@ -7,6 +7,11 @@ use App\Http\Requests\UpdateProfileRequest;
 use App\Services\Contracts\UserServiceInterface;
 use Illuminate\Http\Request;
 
+/**
+ * @group Users
+ *
+ * Users related endpoints
+ */
 class UsersController extends Controller
 {
     /**
@@ -24,6 +29,25 @@ class UsersController extends Controller
     }
 
     /**
+     * Update User Api
+     *
+     * This Endpoint allow user to update their profile
+     *
+     * @response status=200 {
+     * "result": true,
+     * "message": "User profile updated successfully.",
+     * "payload": null,
+     * "errors": null
+     * }
+     *
+     * @response status=401 scenario="Unauthenticated"
+     * {
+     * "result": false,
+     * "message": "Given authorization token is invalid, please login again",
+     * "payload": null,
+     * "errors": null
+     * }
+     *
      * @param UpdateProfileRequest $request
      * @return \Illuminate\Http\JsonResponse
      */

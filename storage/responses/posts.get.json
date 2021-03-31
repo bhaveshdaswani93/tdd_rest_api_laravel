@@ -1,0 +1,111 @@
+{
+    "result": true,
+    "message": "",
+    "payload": {
+        "data": [
+            {
+                "user_id": 81,
+                "title": "Est dolor doloremque iure.",
+                "description": "Omnis ipsa est minus illo omnis alias. Doloribus officiis doloribus excepturi dolores. Est quia officia rerum hic repellat fugiat.",
+                "post_id": 90
+            },
+            {
+                "user_id": 81,
+                "title": "Quis assumenda ea cupiditate ipsam cupiditate quia.",
+                "description": "Ex dolorem corrupti voluptatum minima autem voluptatem quas et. Sequi reiciendis odio consequatur voluptatem sapiente.",
+                "post_id": 91
+            },
+            {
+                "user_id": 81,
+                "title": "Vel similique non libero dolorum dolorem impedit.",
+                "description": "Tenetur quae aut est vitae. Repellendus at et maxime in in voluptas expedita. Et nisi repellendus voluptatum sint nobis.",
+                "post_id": 92
+            },
+            {
+                "user_id": 81,
+                "title": "Consequatur optio nam et dignissimos incidunt.",
+                "description": "Placeat culpa omnis repellat nam voluptas voluptas. Dolorem magnam assumenda et.",
+                "post_id": 93
+            },
+            {
+                "user_id": 81,
+                "title": "Eaque quisquam quasi sit dolorem dolorem.",
+                "description": "Velit ad illo explicabo eum tempore sunt ipsum. Praesentium iste cumque animi. Labore minus ea possimus ut et voluptatum.",
+                "post_id": 94
+            },
+            {
+                "user_id": 81,
+                "title": "Enim qui odit possimus occaecati ad qui enim.",
+                "description": "Eligendi tempora et aut nobis enim consequuntur. Cum aut voluptatem odio recusandae deserunt. A delectus consequuntur explicabo tempore.",
+                "post_id": 95
+            },
+            {
+                "user_id": 81,
+                "title": "Autem libero ducimus nobis ut velit beatae doloremque.",
+                "description": "Ipsa delectus doloribus iste similique consequuntur perferendis est consectetur. Fugit consequatur quaerat ut quo ut vel accusamus. Voluptas eveniet omnis est distinctio officiis. Tenetur nostrum enim facere quis cum ad.",
+                "post_id": 96
+            },
+            {
+                "user_id": 81,
+                "title": "Nam laboriosam qui quo odio nostrum rerum culpa.",
+                "description": "Sapiente quis et magni quis sit. Facilis neque sequi quia qui rerum.",
+                "post_id": 97
+            },
+            {
+                "user_id": 81,
+                "title": "Nihil itaque incidunt voluptatem debitis.",
+                "description": "Natus non magni enim culpa quae sed nam animi. Laborum qui mollitia distinctio maxime ut molestiae reprehenderit. Voluptatum dignissimos et facere est aut maxime sunt.",
+                "post_id": 98
+            },
+            {
+                "user_id": 81,
+                "title": "Unde et nisi autem.",
+                "description": "Sunt sed ea cum et non ex nihil. Eaque dolores provident eos consequatur repellat expedita. Ut veniam voluptatum et numquam repellat. Nesciunt ratione tempore a.",
+                "post_id": 99
+            }
+        ],
+        "links": {
+            "first": "http://localhost:8000/api/posts?page=1",
+            "last": "http://localhost:8000/api/posts?page=3",
+            "prev": null,
+            "next": "http://localhost:8000/api/posts?page=2"
+        },
+        "meta": {
+            "current_page": 1,
+            "from": 1,
+            "last_page": 3,
+            "links": [
+                {
+                    "url": null,
+                    "label": "&laquo; Previous",
+                    "active": false
+                },
+                {
+                    "url": "http://localhost:8000/api/posts?page=1",
+                    "label": "1",
+                    "active": true
+                },
+                {
+                    "url": "http://localhost:8000/api/posts?page=2",
+                    "label": "2",
+                    "active": false
+                },
+                {
+                    "url": "http://localhost:8000/api/posts?page=3",
+                    "label": "3",
+                    "active": false
+                },
+                {
+                    "url": "http://localhost:8000/api/posts?page=2",
+                    "label": "Next &raquo;",
+                    "active": false
+                }
+            ],
+            "path": "http://localhost:8000/api/posts",
+            "per_page": "10",
+            "to": 10,
+            "total": 26
+        }
+    },
+    "errors": null
+}

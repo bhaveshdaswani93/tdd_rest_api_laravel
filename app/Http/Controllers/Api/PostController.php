@@ -12,6 +12,11 @@ use App\Services\Contracts\PostServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
+/**
+ * @group Posts
+ *
+ * Posts related endpoints
+ */
 class PostController extends Controller
 {
     /**
@@ -25,7 +30,26 @@ class PostController extends Controller
     }
 
     /**
-     * Display List of users posts
+     * List Post Api
+     *
+     * This endpoint will list posts of logged in user in pagination manner
+     *
+     * @queryParam page integer Use for seeing next page record in pagination. Defaults to 1.
+     *
+     * @responseField current_page integer The current page in the pagination
+     * @responseField from integer The start page in the pagination
+     * @responseField last_page integer The last page in the pagination
+     * @responseField per_page integer Number of records per page
+     *
+     * @responseFile responses/posts.get.json
+     *
+     * @response status=401 scenario="Unauthenticated"
+     * {
+     * "result": false,
+     * "message": "Given authorization token is invalid, please login again",
+     * "payload": null,
+     * "errors": null
+     * }
      *
      * @return \Illuminate\Http\JsonResponse
      */

@@ -5,11 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class LoginUserRequest
- *
  * @bodyParam email string required The unique email of the user. Example: houston.powlowski@example.net
  * @bodyParam password string required The password which will be used for login
- * @package App\Http\Requests
  */
 class LoginUserRequest extends FormRequest
 {
@@ -31,8 +28,8 @@ class LoginUserRequest extends FormRequest
     public function rules()
     {
         return [
+            'email' => 'required',
             'password' => 'required',
-            'email' => 'required'
         ];
     }
 }

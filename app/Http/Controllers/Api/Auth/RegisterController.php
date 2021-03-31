@@ -40,6 +40,9 @@ class RegisterController extends Controller
      * This endpoint allow you to register user.
      *
      * @unauthenticated
+     *
+     * @responseField auth_token string The Bearer token which should be included in header for auth required endpoint
+     *
      * @response {
      * "result": true,
      * "message": "",

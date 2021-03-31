@@ -17,7 +17,6 @@ logo:
 
 toc_footers:
 - <a href="./collection.json">View Postman collection</a>
-- <a href="./openapi.yaml">View OpenAPI (Swagger) spec</a>
 - <a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a>
 
 ---

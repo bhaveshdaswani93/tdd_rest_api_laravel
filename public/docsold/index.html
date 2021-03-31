@@ -64,7 +64,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <p>Base URL</p>
 </blockquote>
 <pre><code class="language-yaml">http://localhost:8000</code></pre><h1>Authenticating requests</h1>
-<p>This API is authenticated by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
+<p>Authenticate requests to this API's endpoints by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can retrieve your token by calling Login or Register Api <b>Generate API token</b>.</p><h1>Authentication Endpoints</h1>
 <p>APIs for Register,Login,Logout users</p>
@@ -77,7 +77,7 @@ You can switch the language used with the tabs at the top right (or from the nav
     "http://localhost:8000/api/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"accusantium","email":"houston.powlowski@example.net","password":"voluptate"}'
+    -d '{"name":"nemo","email":"houston.powlowski@example.net","password":"in"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/register"
@@ -89,9 +89,9 @@ let headers = {
 };
 
 let body = {
-    "name": "accusantium",
+    "name": "nemo",
     "email": "houston.powlowski@example.net",
-    "password": "voluptate"
+    "password": "in"
 }
 
 fetch(url, {
@@ -108,9 +108,9 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'name' =&gt; 'accusantium',
+            'name' =&gt; 'nemo',
             'email' =&gt; 'houston.powlowski@example.net',
-            'password' =&gt; 'voluptate',
+            'password' =&gt; 'in',
         ],
     ]
 );
@@ -195,7 +195,7 @@ The Bearer token which should be included in header for auth required endpoint</
     "http://localhost:8000/api/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"houston.powlowski@example.net","password":"voluptates"}'
+    -d '{"email":"houston.powlowski@example.net","password":"consectetur"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/login"
@@ -208,7 +208,7 @@ let headers = {
 
 let body = {
     "email": "houston.powlowski@example.net",
-    "password": "voluptates"
+    "password": "consectetur"
 }
 
 fetch(url, {
@@ -226,7 +226,7 @@ $response = $client-&gt;post(
         ],
         'json' =&gt; [
             'email' =&gt; 'houston.powlowski@example.net',
-            'password' =&gt; 'voluptates',
+            'password' =&gt; 'consectetur',
         ],
     ]
 );
@@ -371,8 +371,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>
 <label id="auth-POSTapi-logout" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-logout" data-component="header"></label>
 </p>
-</form><h1>Posts</h1>
-<p>Posts related endpoints</p>
+</form><h1>Endpoints</h1>
 <h2>api/posts</h2>
 <p><small class="badge badge-darkred">requires authentication</small></p>
 <blockquote>
@@ -383,7 +382,7 @@ print_r(json_decode((string) $body));</code></pre>
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"title":"at","description":"aut"}'
+    -d '{"title":"ea","description":"voluptas"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/posts"
@@ -396,8 +395,8 @@ let headers = {
 };
 
 let body = {
-    "title": "at",
-    "description": "aut"
+    "title": "ea",
+    "description": "voluptas"
 }
 
 fetch(url, {
@@ -415,8 +414,8 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'title' =&gt; 'at',
-            'description' =&gt; 'aut',
+            'title' =&gt; 'ea',
+            'description' =&gt; 'voluptas',
         ],
     ]
 );
@@ -463,14 +462,14 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PATCH \
-    "http://localhost:8000/api/posts/temporibus" \
+    "http://localhost:8000/api/posts/nulla" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"title":"exercitationem","description":"et"}'
+    -d '{"title":"tempora","description":"error"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/posts/temporibus"
+    "http://localhost:8000/api/posts/nulla"
 );
 
 let headers = {
@@ -480,8 +479,8 @@ let headers = {
 };
 
 let body = {
-    "title": "exercitationem",
-    "description": "et"
+    "title": "tempora",
+    "description": "error"
 }
 
 fetch(url, {
@@ -492,15 +491,15 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;patch(
-    'http://localhost:8000/api/posts/temporibus',
+    'http://localhost:8000/api/posts/nulla',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'title' =&gt; 'exercitationem',
-            'description' =&gt; 'et',
+            'title' =&gt; 'tempora',
+            'description' =&gt; 'error',
         ],
     ]
 );
@@ -553,12 +552,12 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost:8000/api/posts/ipsa" \
+    -G "http://localhost:8000/api/posts/adipisci" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/posts/ipsa"
+    "http://localhost:8000/api/posts/adipisci"
 );
 
 let headers = {
@@ -574,7 +573,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost:8000/api/posts/ipsa',
+    'http://localhost:8000/api/posts/adipisci',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -628,12 +627,12 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
-    "http://localhost:8000/api/posts/quod" \
+    "http://localhost:8000/api/posts/enim" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/posts/quod"
+    "http://localhost:8000/api/posts/enim"
 );
 
 let headers = {
@@ -649,7 +648,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;delete(
-    'http://localhost:8000/api/posts/quod',
+    'http://localhost:8000/api/posts/enim',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -688,26 +687,19 @@ print_r(json_decode((string) $body));</code></pre>
 <br>
 </p>
 </form>
-<h2>List Post Api</h2>
+<h2>Display List of users posts</h2>
 <p><small class="badge badge-darkred">requires authentication</small></p>
-<p>This endpoint will list posts of logged in user in pagination manner</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost:8000/api/posts?page=18" \
+    -G "http://localhost:8000/api/posts" \
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/posts"
 );
-
-let params = {
-    "page": "18",
-};
-Object.keys(params)
-    .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 let headers = {
     "Authorization": "Bearer {YOUR_AUTH_KEY}",
@@ -728,134 +720,17 @@ $response = $client-&gt;get(
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Accept' =&gt; 'application/json',
         ],
-        'query' =&gt; [
-            'page'=&gt; '18',
-        ],
     ]
 );
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <blockquote>
-<p>Example response (401, Unauthenticated):</p>
+<p>Example response (401):</p>
 </blockquote>
 <pre><code class="language-json">{
     "result": false,
     "message": "Given authorization token is invalid, please login again",
     "payload": null,
-    "errors": null
-}</code></pre>
-<blockquote>
-<p>Example response (200):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "result": true,
-    "message": "",
-    "payload": {
-        "data": [
-            {
-                "user_id": 81,
-                "title": "Est dolor doloremque iure.",
-                "description": "Omnis ipsa est minus illo omnis alias. Doloribus officiis doloribus excepturi dolores. Est quia officia rerum hic repellat fugiat.",
-                "post_id": 90
-            },
-            {
-                "user_id": 81,
-                "title": "Quis assumenda ea cupiditate ipsam cupiditate quia.",
-                "description": "Ex dolorem corrupti voluptatum minima autem voluptatem quas et. Sequi reiciendis odio consequatur voluptatem sapiente.",
-                "post_id": 91
-            },
-            {
-                "user_id": 81,
-                "title": "Vel similique non libero dolorum dolorem impedit.",
-                "description": "Tenetur quae aut est vitae. Repellendus at et maxime in in voluptas expedita. Et nisi repellendus voluptatum sint nobis.",
-                "post_id": 92
-            },
-            {
-                "user_id": 81,
-                "title": "Consequatur optio nam et dignissimos incidunt.",
-                "description": "Placeat culpa omnis repellat nam voluptas voluptas. Dolorem magnam assumenda et.",
-                "post_id": 93
-            },
-            {
-                "user_id": 81,
-                "title": "Eaque quisquam quasi sit dolorem dolorem.",
-                "description": "Velit ad illo explicabo eum tempore sunt ipsum. Praesentium iste cumque animi. Labore minus ea possimus ut et voluptatum.",
-                "post_id": 94
-            },
-            {
-                "user_id": 81,
-                "title": "Enim qui odit possimus occaecati ad qui enim.",
-                "description": "Eligendi tempora et aut nobis enim consequuntur. Cum aut voluptatem odio recusandae deserunt. A delectus consequuntur explicabo tempore.",
-                "post_id": 95
-            },
-            {
-                "user_id": 81,
-                "title": "Autem libero ducimus nobis ut velit beatae doloremque.",
-                "description": "Ipsa delectus doloribus iste similique consequuntur perferendis est consectetur. Fugit consequatur quaerat ut quo ut vel accusamus. Voluptas eveniet omnis est distinctio officiis. Tenetur nostrum enim facere quis cum ad.",
-                "post_id": 96
-            },
-            {
-                "user_id": 81,
-                "title": "Nam laboriosam qui quo odio nostrum rerum culpa.",
-                "description": "Sapiente quis et magni quis sit. Facilis neque sequi quia qui rerum.",
-                "post_id": 97
-            },
-            {
-                "user_id": 81,
-                "title": "Nihil itaque incidunt voluptatem debitis.",
-                "description": "Natus non magni enim culpa quae sed nam animi. Laborum qui mollitia distinctio maxime ut molestiae reprehenderit. Voluptatum dignissimos et facere est aut maxime sunt.",
-                "post_id": 98
-            },
-            {
-                "user_id": 81,
-                "title": "Unde et nisi autem.",
-                "description": "Sunt sed ea cum et non ex nihil. Eaque dolores provident eos consequatur repellat expedita. Ut veniam voluptatum et numquam repellat. Nesciunt ratione tempore a.",
-                "post_id": 99
-            }
-        ],
-        "links": {
-            "first": "http:\/\/localhost:8000\/api\/posts?page=1",
-            "last": "http:\/\/localhost:8000\/api\/posts?page=3",
-            "prev": null,
-            "next": "http:\/\/localhost:8000\/api\/posts?page=2"
-        },
-        "meta": {
-            "current_page": 1,
-            "from": 1,
-            "last_page": 3,
-            "links": [
-                {
-                    "url": null,
-                    "label": "&amp;laquo; Previous",
-                    "active": false
-                },
-                {
-                    "url": "http:\/\/localhost:8000\/api\/posts?page=1",
-                    "label": "1",
-                    "active": true
-                },
-                {
-                    "url": "http:\/\/localhost:8000\/api\/posts?page=2",
-                    "label": "2",
-                    "active": false
-                },
-                {
-                    "url": "http:\/\/localhost:8000\/api\/posts?page=3",
-                    "label": "3",
-                    "active": false
-                },
-                {
-                    "url": "http:\/\/localhost:8000\/api\/posts?page=2",
-                    "label": "Next &amp;raquo;",
-                    "active": false
-                }
-            ],
-            "path": "http:\/\/localhost:8000\/api\/posts",
-            "per_page": "10",
-            "to": 10,
-            "total": 26
-        }
-    },
     "errors": null
 }</code></pre>
 <div id="execution-results-GETapi-posts" hidden>
@@ -880,31 +755,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>
 <label id="auth-GETapi-posts" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-posts" data-component="header"></label>
 </p>
-<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<p>
-<b><code>page</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
-<input type="number" name="page" data-endpoint="GETapi-posts" data-component="query"  hidden>
-<br>
-Use for seeing next page record in pagination. Defaults to 1.</p>
-</form>
-<h3>Response</h3>
-<h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
-<p>
-<b><code>current_page</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-<br>
-The current page in the pagination</p>
-<p>
-<b><code>from</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-<br>
-The start page in the pagination</p>
-<p>
-<b><code>last_page</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-<br>
-The last page in the pagination</p>
-<p>
-<b><code>per_page</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-<br>
-Number of records per page</p><h1>Users</h1>
+</form><h1>Users</h1>
 <p>Users related endpoints</p>
 <h2>Change Password Api</h2>
 <p><small class="badge badge-darkred">requires authentication</small></p>
@@ -917,7 +768,7 @@ Number of records per page</p><h1>Users</h1>
     -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"password":"omnis"}'
+    -d '{"password":"in"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/users/change-password"
@@ -930,7 +781,7 @@ let headers = {
 };
 
 let body = {
-    "password": "omnis"
+    "password": "in"
 }
 
 fetch(url, {
@@ -948,7 +799,7 @@ $response = $client-&gt;patch(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'password' =&gt; 'omnis',
+            'password' =&gt; 'in',
         ],
     ]
 );
@@ -1000,109 +851,6 @@ print_r(json_decode((string) $body));</code></pre>
 <input type="text" name="password" data-endpoint="PATCHapi-users-change-password" data-component="body" required  hidden>
 <br>
 </p>
-
-</form>
-<h2>Update User Api</h2>
-<p><small class="badge badge-darkred">requires authentication</small></p>
-<p>This Endpoint allow user to update their profile</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X PATCH \
-    "http://localhost:8000/api/users/profile" \
-    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"name":"dolor","email":"houston.powlowski@example.net"}'
-</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/users/profile"
-);
-
-let headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "name": "dolor",
-    "email": "houston.powlowski@example.net"
-}
-
-fetch(url, {
-    method: "PATCH",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre>
-<pre><code class="language-php">
-$client = new \GuzzleHttp\Client();
-$response = $client-&gt;patch(
-    'http://localhost:8000/api/users/profile',
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
-            'Accept' =&gt; 'application/json',
-        ],
-        'json' =&gt; [
-            'name' =&gt; 'dolor',
-            'email' =&gt; 'houston.powlowski@example.net',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre>
-<blockquote>
-<p>Example response (200):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "result": true,
-    "message": "User profile updated successfully.",
-    "payload": null,
-    "errors": null
-}</code></pre>
-<blockquote>
-<p>Example response (401, Unauthenticated):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "result": false,
-    "message": "Given authorization token is invalid, please login again",
-    "payload": null,
-    "errors": null
-}</code></pre>
-<div id="execution-results-PATCHapi-users-profile" hidden>
-    <blockquote>Received response<span id="execution-response-status-PATCHapi-users-profile"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-PATCHapi-users-profile"></code></pre>
-</div>
-<div id="execution-error-PATCHapi-users-profile" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-PATCHapi-users-profile"></code></pre>
-</div>
-<form id="form-PATCHapi-users-profile" data-method="PATCH" data-path="api/users/profile" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('PATCHapi-users-profile', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-PATCHapi-users-profile" onclick="tryItOut('PATCHapi-users-profile');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-PATCHapi-users-profile" onclick="cancelTryOut('PATCHapi-users-profile');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-PATCHapi-users-profile" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-purple">PATCH</small>
- <b><code>api/users/profile</code></b>
-</p>
-<p>
-<label id="auth-PATCHapi-users-profile" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="PATCHapi-users-profile" data-component="header"></label>
-</p>
-<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-<p>
-<b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="text" name="name" data-endpoint="PATCHapi-users-profile" data-component="body" required  hidden>
-<br>
-The Name of the post.</p>
-<p>
-<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-<input type="text" name="email" data-endpoint="PATCHapi-users-profile" data-component="body" required  hidden>
-<br>
-The unique email of the user.</p>
 
 </form>
     </div>

@@ -37,7 +37,7 @@ class AuthService implements AuthServiceInterface
             // return $this->respondBadRequest('User not registered.');
         }
 
-        if (!Hash::check('password', $user->password)) {
+        if (!Hash::check($attributes['password'], $user->password)) {
             $result = false;
             $message = 'Wrong password provided.';
             // return $this->respondBadRequest('Wrong password provided.');

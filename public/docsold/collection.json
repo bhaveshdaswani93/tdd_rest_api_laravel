@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Blog Api",
-        "_postman_id": "8f2b0bba-65ba-431e-9abd-fa65c5f19660",
+        "_postman_id": "7ef5127e-8f47-4319-87ab-437955e3f31b",
         "description": "This is blog api documentation",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -42,7 +42,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"accusantium\",\n    \"email\": \"houston.powlowski@example.net\",\n    \"password\": \"voluptate\"\n}"
+                            "raw": "{\n    \"name\": \"nemo\",\n    \"email\": \"houston.powlowski@example.net\",\n    \"password\": \"in\"\n}"
                         },
                         "description": "This endpoint allow you to register user.",
                         "auth": {
@@ -74,7 +74,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"houston.powlowski@example.net\",\n    \"password\": \"voluptates\"\n}"
+                            "raw": "{\n    \"email\": \"houston.powlowski@example.net\",\n    \"password\": \"consectetur\"\n}"
                         },
                         "description": "This endpoint allow you to login user.",
                         "auth": {
@@ -112,8 +112,8 @@
             ]
         },
         {
-            "name": "Posts",
-            "description": "\nPosts related endpoints",
+            "name": "Endpoints",
+            "description": "",
             "item": [
                 {
                     "name": "api\/posts",
@@ -138,7 +138,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"title\": \"at\",\n    \"description\": \"aut\"\n}"
+                            "raw": "{\n    \"title\": \"ea\",\n    \"description\": \"voluptas\"\n}"
                         },
                         "description": ""
                     },
@@ -157,7 +157,7 @@
                                 {
                                     "id": "post",
                                     "key": "post",
-                                    "value": "temporibus",
+                                    "value": "nulla",
                                     "description": ""
                                 }
                             ]
@@ -175,7 +175,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"title\": \"exercitationem\",\n    \"description\": \"et\"\n}"
+                            "raw": "{\n    \"title\": \"tempora\",\n    \"description\": \"error\"\n}"
                         },
                         "description": ""
                     },
@@ -194,7 +194,7 @@
                                 {
                                     "id": "post",
                                     "key": "post",
-                                    "value": "ipsa",
+                                    "value": "adipisci",
                                     "description": ""
                                 }
                             ]
@@ -228,7 +228,7 @@
                                 {
                                     "id": "post",
                                     "key": "post",
-                                    "value": "quod",
+                                    "value": "enim",
                                     "description": ""
                                 }
                             ]
@@ -250,21 +250,14 @@
                     "response": []
                 },
                 {
-                    "name": "List Post Api",
+                    "name": "Display List of users posts",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "{{baseUrl}}",
                             "path": "api\/posts",
-                            "query": [
-                                {
-                                    "key": "page",
-                                    "value": "18",
-                                    "description": "Use for seeing next page record in pagination. Defaults to 1.",
-                                    "disabled": false
-                                }
-                            ],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/posts?page=18"
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/posts"
                         },
                         "method": "GET",
                         "header": [
@@ -278,7 +271,7 @@
                             }
                         ],
                         "body": null,
-                        "description": "This endpoint will list posts of logged in user in pagination manner"
+                        "description": ""
                     },
                     "response": []
                 }
@@ -311,38 +304,9 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"password\": \"omnis\"\n}"
+                            "raw": "{\n    \"password\": \"in\"\n}"
                         },
                         "description": "This endpoints allow you to update your password"
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Update User Api",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/users\/profile",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/users\/profile"
-                        },
-                        "method": "PATCH",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"name\": \"dolor\",\n    \"email\": \"houston.powlowski@example.net\"\n}"
-                        },
-                        "description": "This Endpoint allow user to update their profile"
                     },
                     "response": []
                 }

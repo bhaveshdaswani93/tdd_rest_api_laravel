@@ -21,16 +21,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
 Route::post('/register', RegisterController::class);
 Route::post('/login', LoginController::class);
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::patch('users/change-password', ChangePasswordController::class);
+
     Route::patch('users/profile', [UsersController::class, 'update']);
+
     Route::post('logout', LogoutController::class);
 
     Route::post('posts', [PostController::class, 'store']);
