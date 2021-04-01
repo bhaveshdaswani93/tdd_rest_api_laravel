@@ -11,8 +11,14 @@
     },
     "devDependencies": {
         "axios": "^0.21",
+        "cz-conventional-changelog": "^3.3.0",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
     }
 }
